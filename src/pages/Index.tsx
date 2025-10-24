@@ -105,12 +105,31 @@ export default function Index() {
       }
     };
 
+    const handleClick = () => {
+      keysRef.current.space = true;
+      setTimeout(() => {
+        keysRef.current.space = false;
+      }, 100);
+    };
+
+    const handleTouch = (e: TouchEvent) => {
+      e.preventDefault();
+      keysRef.current.space = true;
+      setTimeout(() => {
+        keysRef.current.space = false;
+      }, 100);
+    };
+
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
+    window.addEventListener('click', handleClick);
+    window.addEventListener('touchstart', handleTouch, { passive: false });
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener('click', handleClick);
+      window.removeEventListener('touchstart', handleTouch);
     };
   }, []);
 
@@ -234,7 +253,7 @@ export default function Index() {
         ctx.font = '16px Rubik';
         ctx.textAlign = 'left';
         ctx.fillText(`Level: ${currentLevel.name}`, 10, 30);
-        ctx.fillText(`Press SPACE to jump`, 10, 50);
+        ctx.fillText(`Tap or press SPACE to jump`, 10, 50);
 
         animationRef.current = requestAnimationFrame(gameLoop);
       };
