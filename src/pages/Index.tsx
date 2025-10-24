@@ -105,31 +105,12 @@ export default function Index() {
       }
     };
 
-    const handleClick = () => {
-      keysRef.current.space = true;
-      setTimeout(() => {
-        keysRef.current.space = false;
-      }, 100);
-    };
-
-    const handleTouch = (e: TouchEvent) => {
-      e.preventDefault();
-      keysRef.current.space = true;
-      setTimeout(() => {
-        keysRef.current.space = false;
-      }, 100);
-    };
-
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
-    window.addEventListener('click', handleClick);
-    window.addEventListener('touchstart', handleTouch, { passive: false });
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
-      window.removeEventListener('click', handleClick);
-      window.removeEventListener('touchstart', handleTouch);
     };
   }, []);
 
@@ -497,7 +478,20 @@ export default function Index() {
             ref={canvasRef}
             width={1000}
             height={400}
-            className="border-4 border-[#1E40AF] rounded-lg shadow-2xl w-full"
+            onClick={() => {
+              keysRef.current.space = true;
+              setTimeout(() => {
+                keysRef.current.space = false;
+              }, 100);
+            }}
+            onTouchStart={(e) => {
+              e.preventDefault();
+              keysRef.current.space = true;
+              setTimeout(() => {
+                keysRef.current.space = false;
+              }, 100);
+            }}
+            className="border-4 border-[#1E40AF] rounded-lg shadow-2xl w-full cursor-pointer"
           />
         </div>
       </div>
