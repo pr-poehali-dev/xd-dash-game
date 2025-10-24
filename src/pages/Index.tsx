@@ -23,8 +23,8 @@ type Level = {
 };
 
 const PLAYER_SIZE = 30;
-const GRAVITY = 0.5;
-const JUMP_FORCE = -12;
+const GRAVITY = 0.6;
+const JUMP_FORCE = -10;
 const MOVE_SPEED = 4;
 
 const defaultLevels: Level[] = [
