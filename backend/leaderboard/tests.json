@@ -1,0 +1,31 @@
+{
+  "tests": [
+    {
+      "name": "Get leaderboard",
+      "method": "GET",
+      "path": "/?action=leaderboard",
+      "expectedStatus": 200,
+      "expectedBody": {
+        "leaderboard": "array"
+      },
+      "bodyMatcher": "partial"
+    },
+    {
+      "name": "Complete level",
+      "method": "POST",
+      "path": "/",
+      "body": {
+        "action": "complete_level",
+        "nickname": "TestPlayer",
+        "level_id": "1",
+        "level_name": "Test Level",
+        "difficulty": 3
+      },
+      "expectedStatus": 200,
+      "expectedBody": {
+        "success": true
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}

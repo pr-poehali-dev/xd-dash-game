@@ -77,14 +77,26 @@ const defaultLevels: Level[] = [
   },
 ];
 
+type LeaderboardPlayer = {
+  nickname: string;
+  total_stars: number;
+  levels_completed: number;
+  created_at: string;
+};
+
+const API_URL = 'https://functions.poehali.dev/d551eb30-f9ff-45e1-83c4-32242431b386';
+
 export default function Index() {
-  const [screen, setScreen] = useState<'menu' | 'play' | 'editor' | 'custom'>('menu');
+  const [screen, setScreen] = useState<'menu' | 'play' | 'editor' | 'custom' | 'leaderboard'>('menu');
   const [levels, setLevels] = useState<Level[]>(defaultLevels);
   const [customLevels, setCustomLevels] = useState<Level[]>([]);
   const [currentLevel, setCurrentLevel] = useState<Level | null>(null);
   const [selectedObject, setSelectedObject] = useState<'block' | 'spike' | 'finish'>('block');
   const [editorObjects, setEditorObjects] = useState<GameObject[]>([]);
   const [levelName, setLevelName] = useState('');
+  const [playerNickname, setPlayerNickname] = useState<string>('');
+  const [leaderboard, setLeaderboard] = useState<LeaderboardPlayer[]>([]);
+  const [showNicknameInput, setShowNicknameInput] = useState(false);
   
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const playerRef = useRef({ x: 50, y: 300, velocityY: 0, isJumping: false, isDead: false });
